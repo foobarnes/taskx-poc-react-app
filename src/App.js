@@ -1,23 +1,17 @@
 import React from 'react';
 import logo from './logo.svg';
+import memoji from './memoji_smile.png';
 import './App.css';
+import Tasks from './GetTasks.js';
+import Emoji from './Emoji.js';
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <img src={memoji} className="App-logo" alt="logo" />
+        <br/>
+        <Tasks />
       </header>
     </div>
   );

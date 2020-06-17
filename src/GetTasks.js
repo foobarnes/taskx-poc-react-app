@@ -81,7 +81,11 @@ export default class Tasks extends React.Component {
 		});
 		const response = await fetch(getTasksRequest);
 		const data = await response.json();
-		const currentTask = data.body.pop(0);
+		console.log(data.body.length)
+		const randomIndex = Math.floor(Math.random() * data.body.length)
+		console.log(randomIndex)
+		const currentTask = data.body.splice(randomIndex, 1)[0];
+		console.log(currentTask)
 		this.setState({ allTasks: data.body, currentTask: currentTask, loading: false })
 		console.log(data)
 	}

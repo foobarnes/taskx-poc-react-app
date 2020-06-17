@@ -1,9 +1,7 @@
 import React from 'react';
-import logo from './logo.svg';
 import memoji from './memoji_smile.png';
 import './App.css';
 import Tasks from './GetTasks.js';
-import Emoji from './Emoji.js';
 
 function App() {
   return (

@@ -1,6 +1,8 @@
 import React from 'react';
 import Emoji from './Emoji.js';
+
 import Button from '@material-ui/core/Button';
+import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 
 export default class Tasks extends React.Component {
 
@@ -12,9 +14,63 @@ export default class Tasks extends React.Component {
 			allTasks: null,
 		}
 	    this.handleClick = this.handleClick.bind(this)
+	    this.getTasks = this.getTasks.bind(this)
+	    this.resetTasks = this.resetTasks.bind(this)
   	}
 
-	async componentDidMount() {
+	componentDidMount() {
+		this.getTasks()
+	}
+
+	handleClick = () => {
+		const allTasks = this.state.allTasks
+		const currentTask = allTasks.pop()
+		this.setState({ allTasks: allTasks, currentTask: currentTask })
+	}
+
+	resetTasks() {
+		this.getTasks()
+	}
+
+	render() {
+		return <div>
+			{this.state.loading || !this.state.currentTask ? (
+				<div>
+					<div>We're all out of tasks. Sry.</div>
+					<br />
+					<div>
+						<Button variant="contained" size="large"onClick={this.resetTasks}><b>Gimme 'em back.</b></Button>
+					</div>
+				</div>
+			) : (
+				<div>
+					<div>{this.state.currentTask.data}</div>
+					<br/>
+					<div><Emoji symbol="🏆" label="trophy" />&nbsp;&nbsp;&nbsp;{this.state.currentTask.win_criteria}</div>
+					<div>{this.state.currentTask.time}</div>
+					<br />
+					<div>
+						<Button variant="contained" size="large" onClick={this.handleClick}><b>Next</b></Button>
+					</div>
+					<br />
+					<br />
+					<br />
+					<div>
+						<Button
+							variant="contained"
+							color="default"
+							size="small"
+							startIcon={<CloudUploadIcon />}
+						>
+					        Upload
+					    </Button>
+				    </div>
+			    </div>
+			)}
+		</div>
+	}
+
+	async getTasks() {
 		const url = "https://fayktmygu7.execute-api.us-east-1.amazonaws.com/test/tasks";
 		const headers = new Headers();
 		const getTasksRequest = new Request(url, {
@@ -28,28 +84,5 @@ export default class Tasks extends React.Component {
 		const currentTask = data.body.pop(0);
 		this.setState({ allTasks: data.body, currentTask: currentTask, loading: false })
 		console.log(data)
-	}
-
-	handleClick = () => {
-		const allTasks = this.state.allTasks
-		const currentTask = allTasks.pop()
-		this.setState({ allTasks: allTasks, currentTask: currentTask })
-	}
-
-	render() {
-		return <div>
-			{this.state.loading || !this.state.currentTask ? (
-				<div>We're all out of tasks. Sry.</div>
-			) : (
-				<div>
-					<div>{this.state.currentTask.data}</div>
-					<br/>
-					<div><Emoji symbol="🏆" label="trophy" />&nbsp;&nbsp;&nbsp;{this.state.currentTask.win_criteria}</div>
-					<div>{this.state.currentTask.time}</div>
-					<br />
-					<Button variant="contained" onClick={this.handleClick}>Next</Button>
-				</div>
-			)}
-		</div>
 	}
 }

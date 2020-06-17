@@ -44,7 +44,7 @@ export default class Tasks extends React.Component {
 				</div>
 			) : (
 				<div>
-					<div>{this.state.currentTask.data}</div>
+					<div><b>{this.state.currentTask.data}</b></div>
 					<br/>
 					<div><Emoji symbol="🏆" label="trophy" />&nbsp;&nbsp;&nbsp;{this.state.currentTask.win_criteria}</div>
 					<div>{this.state.currentTask.time}</div>

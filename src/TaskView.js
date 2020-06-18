@@ -1,10 +1,10 @@
 import React from 'react';
 import Emoji from './Emoji.js';
+import UploadButtonView from './UploadButtonView.js';
 
 import Button from '@material-ui/core/Button';
-import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 
-export default class Tasks extends React.Component {
+export default class TaskView extends React.Component {
 
 	constructor(props) {
 	    super(props)
@@ -59,16 +59,7 @@ export default class Tasks extends React.Component {
 					<br />
 					<br />
 					<br />
-					<div>
-						<Button
-							variant="contained"
-							color="default"
-							size="small"
-							startIcon={<CloudUploadIcon />}
-						>
-					        Upload
-					    </Button>
-				    </div>
+					<UploadButtonView />
 			    </div>
 			}
 		</div>
@@ -85,11 +76,8 @@ export default class Tasks extends React.Component {
 		});
 		const response = await fetch(getTasksRequest);
 		const data = await response.json();
-		console.log(data.body.length)
 		const randomIndex = Math.floor(Math.random() * data.body.length)
-		console.log(randomIndex)
 		const currentTask = data.body.splice(randomIndex, 1)[0];
-		console.log(currentTask)
 		this.setState({ allTasks: data.body, currentTask: currentTask, loading: false })
 		console.log(data)
 	}

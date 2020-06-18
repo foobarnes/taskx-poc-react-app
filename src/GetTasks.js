@@ -34,7 +34,10 @@ export default class Tasks extends React.Component {
 
 	render() {
 		return <div>
-			{this.state.loading || !this.state.currentTask ? (
+			{this.state.loading &&
+				<div>loading...</div>
+			}
+			{!this.state.currentTask && !this.state.loading &&
 				<div>
 					<div>We're all out of tasks. Sry.</div>
 					<br />
@@ -42,7 +45,8 @@ export default class Tasks extends React.Component {
 						<Button variant="contained" size="large"onClick={this.resetTasks}><b>Gimme 'em back.</b></Button>
 					</div>
 				</div>
-			) : (
+			}
+			{this.state.currentTask &&
 				<div>
 					<div><b>{this.state.currentTask.data}</b></div>
 					<br/>
@@ -66,7 +70,7 @@ export default class Tasks extends React.Component {
 					    </Button>
 				    </div>
 			    </div>
-			)}
+			}
 		</div>
 	}
 

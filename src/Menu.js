@@ -1,6 +1,5 @@
 import React from 'react';
 import './Menu.css';
-import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import MenuOpenIcon from '@material-ui/icons/MenuOpen';

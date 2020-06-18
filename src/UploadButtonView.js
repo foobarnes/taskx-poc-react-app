@@ -4,6 +4,11 @@ import Button from '@material-ui/core/Button';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 
 export default function UploadButtonView() {
+
+	const handleUploadClicked = () => {
+		window.open("sms:1-615-397-9365", "_blank");
+	};
+
 	return (
 		<div>
 			<Button
@@ -12,7 +17,7 @@ export default function UploadButtonView() {
 				size="small"
 				startIcon={<CloudUploadIcon />}
 			>
-		        Upload
+		        Submit
 		    </Button>
 	    </div>
     );

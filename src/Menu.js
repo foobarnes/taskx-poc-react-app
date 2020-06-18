@@ -19,6 +19,11 @@ export default function SimpleMenu() {
     setAnchorEl(null);
   };
 
+  const suggestClicked = () => {
+    handleClose();
+    window.open("https://forms.gle/M4r48CaK8hi25zoJ8", "_blank");
+  }
+
   return (
     <div className="Menu">
       <Fab size="small" aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick} color="default" aria-label="add">
@@ -31,7 +36,7 @@ export default function SimpleMenu() {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <MenuItem onClick={handleClose}>Suggest a task&nbsp;&nbsp;<Emoji symbol="💡" /></MenuItem>
+        <MenuItem onClick={suggestClicked}>Suggest a task&nbsp;&nbsp;<Emoji symbol="💡" /></MenuItem>
         <MenuItem onClick={handleClose}>Give feedback&nbsp;&nbsp;<Emoji symbol="💌" /></MenuItem>
         <MenuItem onClick={handleClose}>Buy Chandler a coffee</MenuItem>
       </Menu>

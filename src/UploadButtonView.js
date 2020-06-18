@@ -12,6 +12,7 @@ export default function UploadButtonView() {
 	return (
 		<div>
 			<Button
+				onClick={handleUploadClicked}
 				variant="contained"
 				color="default"
 				size="small"

@@ -23,6 +23,11 @@ export default function SimpleMenu() {
     window.open("https://forms.gle/M4r48CaK8hi25zoJ8", "_blank");
   }
 
+  const feedbackClicked = () => {
+    handleClose();
+    window.open("https://forms.gle/pcuCTMKpKUKkqcpd8", "_blank");
+  }
+
   const buyCoffeeClicked = () => {
     handleClose();
     window.open("https://buymeacoffee.com/chandlerbarnes", "_blank");
@@ -40,8 +45,8 @@ export default function SimpleMenu() {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <MenuItem onClick={suggestClicked}>Suggest a task&nbsp;&nbsp;<Emoji symbol="💡" /></MenuItem>
-        <MenuItem onClick={handleClose}>Give feedback&nbsp;&nbsp;<Emoji symbol="💌" /></MenuItem>
+        <MenuItem onClick={suggestClicked}>I have a task idea&nbsp;&nbsp;<Emoji symbol="💡" /></MenuItem>
+        <MenuItem onClick={feedbackClicked}>I want to give my opinion&nbsp;&nbsp;<Emoji symbol="💌" /></MenuItem>
         <MenuItem onClick={buyCoffeeClicked}>Buy Chandler a coffee&nbsp;&nbsp;<Emoji symbol="☕️" /></MenuItem>
       </Menu>
     </div>

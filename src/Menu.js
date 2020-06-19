@@ -6,31 +6,37 @@ import MenuOpenIcon from '@material-ui/icons/MenuOpen';
 import Fab from '@material-ui/core/Fab';
 
 import Emoji from './Emoji.js';
+import emitMetric from './metrics/metric.js';
 
 export default function SimpleMenu() {
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
+    emitMetric("MenuClicked");
   };
 
   const handleClose = () => {
     setAnchorEl(null);
+    emitMetric("MenuClosed");
   };
 
   const suggestClicked = () => {
     handleClose();
     window.open("https://forms.gle/M4r48CaK8hi25zoJ8", "_blank");
+    emitMetric("SuggestClicked");
   }
 
   const feedbackClicked = () => {
     handleClose();
     window.open("https://forms.gle/pcuCTMKpKUKkqcpd8", "_blank");
+    emitMetric("FeedbackClicked");
   }
 
   const buyCoffeeClicked = () => {
     handleClose();
     window.open("https://buymeacoffee.com/chandlerbarnes", "_blank");
+    emitMetric("BuyCoffeeClicked");
   }
 
   return (

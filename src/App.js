@@ -2,7 +2,7 @@ import React from 'react';
 import memoji from './memoji_smile.png';
 import './App.css';
 import TaskView from './TaskView.js';
-// import FeedbackForm from './FeedbackForm.js';
+
 import Menu from './Menu.js';
 
 function App() {

@@ -1,6 +1,8 @@
 import React from 'react';
+
 import Emoji from './Emoji.js';
 import UploadButtonView from './UploadButtonView.js';
+import emitMetric from './metrics/metric.js';
 
 import Button from '@material-ui/core/Button';
 
@@ -13,7 +15,7 @@ export default class TaskView extends React.Component {
 			currentTask: null,
 			allTasks: null,
 		}
-	    this.handleClick = this.handleClick.bind(this)
+	    this.nextTask = this.nextTask.bind(this)
 	    this.getTasks = this.getTasks.bind(this)
 	    this.resetTasks = this.resetTasks.bind(this)
   	}
@@ -22,14 +24,19 @@ export default class TaskView extends React.Component {
 		this.getTasks()
 	}
 
-	handleClick = () => {
+	nextTask = () => {
+		emitMetric("NextTaskClicked");
 		const allTasks = this.state.allTasks
 		const currentTask = allTasks.pop()
 		this.setState({ allTasks: allTasks, currentTask: currentTask })
+		if (currentTask) {
+			emitMetric("TaskViewed#" + currentTask.pk);
+		}
 	}
 
 	resetTasks() {
-		this.getTasks()
+		emitMetric("ResetTasksClicked");
+		this.getTasks();
 	}
 
 	render() {
@@ -54,18 +61,19 @@ export default class TaskView extends React.Component {
 					<div>{this.state.currentTask.time}</div>
 					<br />
 					<div>
-						<Button variant="contained" size="large" onClick={this.handleClick}><b>Next</b></Button>
+						<Button variant="contained" size="large" onClick={this.nextTask}><b>Next</b></Button>
 					</div>
 					<br />
 					<br />
 					<br />
-					<UploadButtonView />
+					<UploadButtonView taskId={this.state.currentTask.pk}/>
 			    </div>
 			}
 		</div>
 	}
 
 	async getTasks() {
+		emitMetric("GetTasks");
 		const url = "https://fayktmygu7.execute-api.us-east-1.amazonaws.com/test/tasks";
 		const headers = new Headers();
 		const getTasksRequest = new Request(url, {
@@ -78,6 +86,7 @@ export default class TaskView extends React.Component {
 		const data = await response.json();
 		const randomIndex = Math.floor(Math.random() * data.body.length)
 		const currentTask = data.body.splice(randomIndex, 1)[0];
+		emitMetric("TaskViewed#" + currentTask.pk);
 		this.setState({ allTasks: data.body, currentTask: currentTask, loading: false })
 		console.log(data)
 	}

@@ -20,7 +20,7 @@ export default function UploadButtonView(props) {
 				size="small"
 				startIcon={<CloudUploadIcon />}
 			>
-		        Submit
+		        Submit Video
 		    </Button>
 	    </div>
     );
